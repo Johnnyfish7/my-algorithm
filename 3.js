@@ -10,6 +10,7 @@ function fib(n) {
 
 function helper(memo, n) {
   console.log('%c n ------> ', 'color:#0f0;', n)
+  sum += 1
   if (n == 1 || n == 2) return 1;
   if (memo[n]) return memo[n];
   memo[n] = helper(memo, n - 1) + helper(memo, n - 2);
