@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+ function arrange(str) {
+  return new Arrange(str)
+}
+
+class Arrange {
+  constructor(name) {
+    this.name = name
+    this.cbArr = []
+  }
+
+  wait(num) {
+    let step = () => {
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          console.log('%c 等待 5s... ------> ', 'color:#0f0;', '等待 5s...')
+          resolve()
+        }, num * 1000)
+      })
+    }
+    this.cbArr.push(step())
+    return this
+  }
+
+  do(type) {
+    let step = () => {
+      new Promise((resolve, reject) => {
+        if (type === 'commit') {
+          console.log('%c Start to commit ------> ', 'color:#0f0;', 'Start to commit')
+          resolve()
+        } else if (type === 'push') {
+          console.log('%c Start to push ------> ', 'color:#0f0;', 'Start to push')
+          resolve()
+        } else {
+          reject('err type')
+        }
+      })
+    }
+    this.cbArr.push(step())
+    return this
+  }
+
+  execute() {
+    this.cbArr.reduce((prev, curr) => {
+      prev.then(() => curr())
+    }, Promise.resolve())
+  }
+
+}
+// 调用方式
+let res = arrange('William').wait(5).do('commit').wait(5).do('push').execute()
+</script>
+</html>

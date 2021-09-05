@@ -17,3 +17,6 @@ console.log('%c sum ------> ', 'color:#0f0;', sum)
 // n = 6, sum = 15
 // n = 7, sum = 25
 // n = 8, sum = 41
+
+
+
